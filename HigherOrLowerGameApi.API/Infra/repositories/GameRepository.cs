@@ -1,8 +1,7 @@
-using HigherOrLowerGameApi.API.Core;
-using HigherOrLowerGameApi.API.Core.interfaces.repositories;
+using HigherOrLowerGameApi.API.Infra.repositories.interfaces;
 using HigherOrLowerGameApi.API.Model;
 
-namespace HigherOrLowerGameApi.API.DataAcess
+namespace HigherOrLowerGameApi.API.Infra.repositories
 {
     public class GameRepository : BaseRepository<Game>, IGameRepository
     {

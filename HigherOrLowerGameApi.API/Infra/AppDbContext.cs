@@ -1,9 +1,9 @@
 using System.ComponentModel.DataAnnotations;
-using HigherOrLowerGameApi.API.Core.EntityMap;
+using HigherOrLowerGameApi.API.Infra.EntityMap;
 using HigherOrLowerGameApi.API.Model;
 using  Microsoft.EntityFrameworkCore;
 
-namespace HigherOrLowerGameApi.API.Core
+namespace HigherOrLowerGameApi.API.Infra
 {
     public class AppDbContext : DbContext
     {

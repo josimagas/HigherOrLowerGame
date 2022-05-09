@@ -1,12 +1,10 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using HigherOrLowerGameApi.API.Core;
-using HigherOrLowerGameApi.API.Core.interfaces.repositories;
+using HigherOrLowerGameApi.API.Infra.repositories.interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace HigherOrLowerGameApi.API.DataAcess
+namespace HigherOrLowerGameApi.API.Infra.repositories
 {
     public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : class
     {

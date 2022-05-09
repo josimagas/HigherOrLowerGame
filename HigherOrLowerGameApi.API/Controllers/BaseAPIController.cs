@@ -2,12 +2,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HigherOrLowerGameApi.API.Controllers
 {
-    public class BaseAPIController : Controller
+    [Route("api/[controller]")]
+    [ApiController]
+    public abstract class BaseAPIController : ControllerBase
     {
-        // GET
-        public IActionResult Index()
-        {
-            return View();
-        }
+        
     }
 }

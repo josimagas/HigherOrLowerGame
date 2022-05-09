@@ -2,7 +2,7 @@ using HigherOrLowerGameApi.API.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace HigherOrLowerGameApi.API.Core.EntityMap
+namespace HigherOrLowerGameApi.API.Infra.EntityMap
 {
     public class GameMap: IEntityTypeConfiguration<Game>
     {
@@ -10,7 +10,8 @@ namespace HigherOrLowerGameApi.API.Core.EntityMap
         {
             entityTypeBuilder.ToTable(nameof(Game));
             
-            entityTypeBuilder.Property(e => e.Id).ValueGeneratedNever();            
+            entityTypeBuilder.Property(e => e.Id).ValueGeneratedNever();
+            entityTypeBuilder.Property(e => e.CurrentPlayer).HasMaxLength(50);
 
         }
 

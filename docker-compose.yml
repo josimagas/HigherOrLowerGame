@@ -1,0 +1,13 @@
+version: '3.4'
+services:
+
+  database:
+    image: postgres
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=p@ssw0rd
+      - POSTGRES_DB=DataBase
+    volumes:
+      - ./volumes/data/db:/var/lib/postgresql/data
+    ports:
+       - 5432:5432

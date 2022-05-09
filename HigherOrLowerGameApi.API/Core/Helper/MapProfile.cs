@@ -4,11 +4,22 @@ using HigherOrLowerGameApi.API.Model;
 
 namespace HigherOrLowerGameApi.API.Core.services
 {
-    public class RequestProfile : Profile
+    public class MapProfile : Profile
     {
-        public RequestProfile()
+        public MapProfile()
         {
-            CreateMap<PlayGameRequest, Game>();
+            #region Request
+            CreateMap<PlayGameRequest, Game>().ReverseMap();
+            #endregion
+
+            #region Response
+
+            CreateMap<Game, PlayGameResponse>();
+            CreateMap<Game, StarGameResponse>();
+            CreateMap<Game, GameStatusResponse>();
+
+            #endregion
+           
         }
     }
 }
