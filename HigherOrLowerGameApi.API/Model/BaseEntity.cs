@@ -6,14 +6,14 @@ namespace HigherOrLowerGameApi.API.Model
     {
         public Guid Id { get; set; }
 
-        public DateTime CreatedAt { get; set; }
+        public string CreatedAt { get; set; }
 
         public bool Deleted { get; set; }
 
         protected BaseEntity()
         {
             Id = Guid.NewGuid();
-            CreatedAt = DateTime.Now;
+            CreatedAt = DateTime.Now.ToString();
             Deleted = false;
         }
     }

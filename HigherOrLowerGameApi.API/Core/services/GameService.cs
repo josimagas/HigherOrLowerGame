@@ -31,6 +31,7 @@ namespace HigherOrLowerGameApi.API.Core.services
                 SecondPlayerScore = 0,
                 NumberOfCardOnDeck = 52,
                 CurrentPlayer = string.Empty,
+                Finished = false,
                 CurrentCardValue = randomValue
             });
             
