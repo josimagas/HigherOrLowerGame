@@ -2,7 +2,7 @@ using AutoMapper;
 using HigherOrLowerGameApi.API.Core.Dto;
 using HigherOrLowerGameApi.API.Model;
 
-namespace HigherOrLowerGameApi.API.Core.services
+namespace HigherOrLowerGameApi.API.Core.Helper
 {
     public class MapProfile : Profile
     {

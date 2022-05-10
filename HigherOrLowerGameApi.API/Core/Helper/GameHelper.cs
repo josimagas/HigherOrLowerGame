@@ -1,6 +1,6 @@
 using HigherOrLowerGameApi.API.Core.Dto;
 
-namespace HigherOrLowerGameApi.API.Core.services
+namespace HigherOrLowerGameApi.API.Core.Helper
 {
     public static class GameHelper
     {

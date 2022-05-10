@@ -4,7 +4,7 @@ services:
   database:
     image: postgres
     environment:
-      - POSTGRES_USER=root
+      - POSTGRES_USER=sudo
       - POSTGRES_PASSWORD=p@ssw0rd
       - POSTGRES_DB=DataBase
     volumes:

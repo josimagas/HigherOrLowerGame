@@ -15,7 +15,7 @@ builder.Services.AddControllers();
 
 builder.Services.AddEntityFrameworkNpgsql()
 .AddDbContext<AppDbContext>(options =>
-options.UseNpgsql("Server=localhost;Port=5432;Database=DB_HigherOrLower;User Id=root;Password=p@ssw0rd;"));
+options.UseNpgsql("Server=localhost;Port=5432;Database=DataBase;User Id=sudo;Password=p@ssw0rd;"));
 builder.Services.AddAutoMapper(assembly);
 
 var app = builder.Build();

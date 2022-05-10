@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using HigherOrLowerGameApi.API.Core.Dto;
+using HigherOrLowerGameApi.API.Core.Helper;
 
 namespace HigherOrLowerGameApi.API.Core.services.interfaces
 {

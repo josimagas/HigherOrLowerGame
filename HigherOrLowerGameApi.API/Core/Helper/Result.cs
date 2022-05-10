@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Net;
 
-namespace HigherOrLowerGameApi.API.Core.services
+namespace HigherOrLowerGameApi.API.Core.Helper
 {
     public class Result<T> : Result where T : class
     {

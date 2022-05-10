@@ -16,7 +16,9 @@ namespace HigherOrLowerGameApi.API.Infra
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Ignore<ValidationResult>();
+            base.OnModelCreating(modelBuilder);
+
+          
             modelBuilder.ApplyConfiguration(new GameMap());
         }
         

@@ -3,6 +3,7 @@ using System;
 using System.Threading.Tasks;
 using AutoMapper;
 using HigherOrLowerGameApi.API.Core.Dto;
+using HigherOrLowerGameApi.API.Core.Helper;
 using HigherOrLowerGameApi.API.Core.services.interfaces;
 using HigherOrLowerGameApi.API.Infra.repositories.interfaces;
 using HigherOrLowerGameApi.API.Model;

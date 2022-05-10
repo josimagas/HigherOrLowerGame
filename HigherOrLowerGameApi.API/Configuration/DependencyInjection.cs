@@ -12,9 +12,9 @@ namespace HigherOrLowerGameApi.API.Configuration
         {
             services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
             
-            services.AddScoped(typeof(IGameRepository), typeof(GameRepository));
+            services.AddScoped<IGameRepository, GameRepository>();
             
-            services.AddScoped(typeof(IGameService), typeof(GameService));
+            services.AddScoped<IGameService, GameService>();
             
             
         }
