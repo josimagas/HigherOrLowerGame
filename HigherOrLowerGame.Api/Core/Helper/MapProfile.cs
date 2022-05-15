@@ -15,7 +15,7 @@ namespace HigherOrLowerGame.Api.Core.Helper
             #region Response
 
             CreateMap<Game, PlayGameResponse>();
-            CreateMap<Game, StarGameResponse>();
+            CreateMap<Game, StartGameResponse>();
             CreateMap<Game, GameStatusResponse>();
 
             #endregion

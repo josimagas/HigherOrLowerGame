@@ -1,10 +1,12 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 
 namespace HigherOrLowerGame.Api.Configuration
 {
+    [ExcludeFromCodeCoverage]
     public static class SwaggerConfig
     {
         public static void AddSwaggerConfiguration(this IServiceCollection services)

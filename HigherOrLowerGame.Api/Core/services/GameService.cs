@@ -20,10 +20,10 @@ namespace HigherOrLowerGame.Api.Core.services
             _repository = repository;
             _mapper = mapper;
         }
-        public async Task<Result<StarGameResponse>> StartGame()
+        public async Task<Result<StartGameResponse>> StartGame()
         {
-            var result = new Result<StarGameResponse>();
-            var randomValue = GameHelper.GenerateRandomCard(1, 52);
+            var result = new Result<StartGameResponse>();
+            var randomValue = GameServiceHelper.GenerateRandomCard(1, 52);
             
             var game = await _repository.AddAsync(new Game()
             {
@@ -35,31 +35,24 @@ namespace HigherOrLowerGame.Api.Core.services
                 CurrentCardValue = randomValue
             });
             
-            result.Value = _mapper.Map<StarGameResponse>(game);
+            result.Value = _mapper.Map<StartGameResponse>(game);
             return result;
         }
 
         public async Task<Result<PlayGameResponse>> PlayGame(Guid id,  PlayGameRequest playGameRequest)
         {
             var result = new Result<PlayGameResponse>();
-            var randomValue = GameHelper.GenerateRandomCard(1, 52);
+            var randomValue = GameServiceHelper.GenerateRandomCard(1, 52);
             
             var game = await _repository.GetById(id);
-            
-            if (game.CurrentPlayer.ToLower().Equals(playGameRequest.CurrentPlayer))
+
+            if (GameServiceHelper.GameIsValidToPlay(game.CurrentPlayer, playGameRequest.CurrentPlayer, game.Finished))
             {
-                
-                result.WithError("This is not your turn to play");
+                result.WithError(game.Finished ? "This game is over." : "This is not your turn to play");
                 return result;
             }
 
-            if (game.Finished)
-            {
-                result.WithError("This game is over. Please, start another game");
-                return result;
-            }
-            
-            var answerCorrect = GameHelper.CorrectAnswer(playGameRequest.Guess, randomValue, game.CurrentCardValue);
+            var answerCorrect = GameServiceHelper.CorrectAnswer(playGameRequest.Guess, randomValue, game.CurrentCardValue);
 
             game.CurrentCardValue = randomValue;
             game.CurrentPlayer = playGameRequest.CurrentPlayer;
@@ -82,7 +75,7 @@ namespace HigherOrLowerGame.Api.Core.services
         public async Task<Result<GameStatusResponse>> GetGameStatus(Guid gameId)
         {
             var result = new Result<GameStatusResponse>();
-            if (String.IsNullOrWhiteSpace(gameId.ToString()))
+            if (gameId == Guid.Empty)
             {
                result.WithError("Game Id must not be null");
                return result;

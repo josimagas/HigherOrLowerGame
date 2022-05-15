@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using HigherOrLowerGame.Api.Core.Dto;
 using HigherOrLowerGame.Api.Core.Helper;
@@ -8,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HigherOrLowerGame.Api.Controllers
 {
+    [ExcludeFromCodeCoverage]
     public class GamesController : BaseAPIController
     {
         private readonly IGameService _service;
@@ -17,8 +19,8 @@ namespace HigherOrLowerGame.Api.Controllers
         }
         
         [HttpPost("start")]
-        [ProducesResponseType(typeof(Result<StarGameResponse>), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(Result<StarGameResponse>), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(Result<StartGameResponse>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(Result<StartGameResponse>), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Start()
         {
             var result = await _service.StartGame();

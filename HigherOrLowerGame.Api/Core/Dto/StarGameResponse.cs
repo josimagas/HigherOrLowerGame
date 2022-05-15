@@ -2,7 +2,7 @@ using System;
 
 namespace HigherOrLowerGame.Api.Core.Dto
 {
-    public class StarGameResponse
+    public class StartGameResponse
     {
         public Guid Id { get; set; }
         public int NumberOfCardOnDeck { get; set; }
