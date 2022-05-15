@@ -2,7 +2,7 @@ using HigherOrLowerGame.Api.Core.Dto;
 
 namespace HigherOrLowerGame.Api.Core.Helper
 {
-    public static class GameHelper
+    public static class GameServiceHelper
     {
 
         public static int GenerateRandomCard(int init, int limit)
