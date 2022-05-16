@@ -18,7 +18,7 @@ docker-compose up
 Navigate to `localhost:5000/swagger/index.html` to explore the API using **SwaggerUI**.
 
 ## Test Coverage
-For simplicity the test coverage files are included in the **HigherOrLowerGame/HigherOrLowerGame.Tests/TestResults/7bd2608f-b83d-4900-afe1-eedb6c3a0d28/coveragereport/** 
+For simplicity the test coverage files are included in the **HigherOrLowerGame/HigherOrLowerGame.Tests/TestResults/{unique-key-auto-generate-folder}/coveragereport/** 
 You just need to click on `index.html` file
 
 
