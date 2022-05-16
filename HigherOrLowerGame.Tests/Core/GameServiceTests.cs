@@ -98,7 +98,7 @@ public class GameServiceTests
 
     }
     [Fact]
-    public async Task PlayGame_ShouldBeValid()
+    public async Task PlayGame_ShouldUpdateGame_WhenValid()
     {
         // Arrange 
         var randomValue = GameServiceHelper.GenerateRandomCard(1, 52);
@@ -107,25 +107,25 @@ public class GameServiceTests
         {
             Id = Guid.NewGuid(),
             CurrentPlayer = "player2",
-            Finished = false,
+            Finished = true,
             CurrentCardValue = 10
         };
-        _gameRepoMock.Setup(x => x.GetById(game.Id)).ReturnsAsync(game);
+        _gameRepoMock.Setup(x => x.GetById(game.Id)).ReturnsAsync(new Game());
         
-        var answerCorrect = GameServiceHelper.CorrectAnswer(move.Guess, randomValue, game.CurrentCardValue);
         
-        _gameRepoMock.Setup(x => x.UpdateAsync(game)).ReturnsAsync(true);
+        _gameRepoMock.Setup(x => x.UpdateAsync(It.IsAny<Game>())).ReturnsAsync(()=>true);
+
+        
+        var answerCorrect = GameServiceHelper.CorrectAnswer(move.Guess, randomValue , game.CurrentCardValue);
+        
+        // Act 
+        var result = _sut.PlayGame(game.Id, move);
         
         _mapperMock.Setup(m => m.Map<Game, PlayGameResponse>(It.IsAny<Game>())).Returns(new PlayGameResponse()
         {
+            Id = game.Id,
             CorrectAnswer = answerCorrect,
-            CurrentCardValue = game.CurrentCardValue,
-            FirstPlayerScore = game.FirstPlayerScore,
-            SecondPlayerScore = game.SecondPlayerScore,
-            NumberOfCardOnDeck = game.NumberOfCardOnDeck
-        });
-        // Act 
-        var result = _sut.PlayGame(game.Id, move);
+            CurrentCardValue = randomValue});
         // Assert
         Assert.True(result.Result.HasSuccess);
 

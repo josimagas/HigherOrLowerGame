@@ -2,6 +2,6 @@ namespace HigherOrLowerGame.Api.Core.Dto
 {
     public enum Guess
     {
-        Higher,Lower
+        Higher=1,Lower
     }
 }

@@ -25,18 +25,23 @@
       <Compile Remove="Migrations\**" />
       <Compile Remove="Configuration\DependencyInjectionConfig.cs" />
       <Compile Remove="Core\Helper\ResponseProfile.cs" />
+      <Compile Remove="Infra\Migrations\**" />
+      <Compile Remove="Configuration\IWebHostExtension.cs" />
     </ItemGroup>
 
     <ItemGroup>
       <EmbeddedResource Remove="Migrations\**" />
+      <EmbeddedResource Remove="Infra\Migrations\**" />
     </ItemGroup>
 
     <ItemGroup>
       <None Remove="Migrations\**" />
+      <None Remove="Infra\Migrations\**" />
     </ItemGroup>
 
     <ItemGroup>
       <Content Remove="Migrations\**" />
+      <Content Remove="Infra\Migrations\**" />
     </ItemGroup>
 
 </Project>

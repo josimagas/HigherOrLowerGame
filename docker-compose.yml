@@ -1,7 +1,11 @@
 version: '3.4'
+
+networks:
+  aspnetcoreapp-network:
+    driver: bridge
 services:
 
-  database:
+  db:
     image: postgres
     environment:
       - POSTGRES_USER=sudo
@@ -9,5 +13,21 @@ services:
       - POSTGRES_DB=DataBase
     volumes:
       - ./volumes/data/db:/var/lib/postgresql/data
+     # - ./sql/create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql 
     ports:
        - 5432:5432
+    networks:
+      - aspnetcoreapp-network
+  web:
+    container_name: 'aspnetcoreapp'
+    image: 'aspnetcoreapp'
+    build:
+      context: .
+      dockerfile: aspnetcore.dockerfile
+    ports:
+      - "5000:5000"
+      - "5001:5001"
+    networks:
+      - aspnetcoreapp-network
+    depends_on:
+      - db

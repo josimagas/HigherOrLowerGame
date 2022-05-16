@@ -45,8 +45,13 @@ namespace HigherOrLowerGame.Api.Core.services
             var randomValue = GameServiceHelper.GenerateRandomCard(1, 52);
             
             var game = await _repository.GetById(id);
+            if (game is null)
+            {
+                result.WithNotFound("Game does not exist");
+                return result;
+            }
 
-            if (GameServiceHelper.GameIsValidToPlay(game.CurrentPlayer, playGameRequest.CurrentPlayer, game.Finished))
+            if (!GameServiceHelper.GameIsValidToPlay(game.CurrentPlayer, playGameRequest.CurrentPlayer, game.Finished))
             {
                 result.WithError(game.Finished ? "This game is over." : "This is not your turn to play");
                 return result;
@@ -66,9 +71,7 @@ namespace HigherOrLowerGame.Api.Core.services
                 result.WithException("Something bad happened.");
                 return result;
             };
-            
-            result.Value =  _mapper.Map<PlayGameResponse>(game);
-            result.Value.CorrectAnswer = answerCorrect;
+            result.Value = _mapper.Map<PlayGameResponse>(game);;
             return result;
         }
 
