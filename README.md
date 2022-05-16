@@ -1,6 +1,6 @@
 # .NET Core | Postgres | Docker 
 
-An eazy-peazy template for building a .NET Core app with Postgres.
+An easy project built using  .NET6 with Postgres and Docker engine. 
 
 ## To Run
 
