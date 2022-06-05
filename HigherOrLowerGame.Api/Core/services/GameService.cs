@@ -45,6 +45,8 @@ namespace HigherOrLowerGame.Api.Core.services
             var randomValue = GameServiceHelper.GenerateRandomCard(1, 52);
             
             var game = await _repository.GetById(id);
+
+                        
             if (game is null)
             {
                 result.WithNotFound("Game does not exist");
@@ -58,6 +60,11 @@ namespace HigherOrLowerGame.Api.Core.services
             }
 
             var answerCorrect = GameServiceHelper.CorrectAnswer(playGameRequest.Guess, randomValue, game.CurrentCardValue);
+
+            /*Refactor:  PROBABLY BREAKS THE OCP 
+             ---if we add another player we'll probably have to add new validation 
+             ---move to another method called SetGamePontuation, it takes the current game mounts the object to be returned
+            */
 
             game.CurrentCardValue = randomValue;
             game.CurrentPlayer = playGameRequest.CurrentPlayer;
