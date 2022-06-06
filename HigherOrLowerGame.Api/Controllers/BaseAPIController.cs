@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace HigherOrLowerGame.Api.Controllers
 {
     [ExcludeFromCodeCoverage]
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     [ApiController]
     public abstract class BaseAPIController : ControllerBase
     {
