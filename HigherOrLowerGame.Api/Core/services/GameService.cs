@@ -22,30 +22,19 @@ namespace HigherOrLowerGame.Api.Core.services
         }
         public async Task<Result<StartGameResponse>> StartGame()
         {
-            var result = new Result<StartGameResponse>();
-            var randomValue = GameServiceHelper.GenerateRandomCard(1, 52);
+            var result = new Result<StartGameResponse>();           
+            var game = new Game();
+            game.ShuffleCard();          
             
-            var game = await _repository.AddAsync(new Game()
-            {
-                FirstPlayerScore = 0,
-                SecondPlayerScore = 0,
-                NumberOfCardOnDeck = 52,
-                CurrentPlayer = string.Empty,
-                Finished = false,
-                CurrentCardValue = randomValue
-            });
-            
-            result.Value = _mapper.Map<StartGameResponse>(game);
+            result.Value = _mapper.Map<StartGameResponse>(await _repository.AddAsync(game));
             return result;
         }
 
         public async Task<Result<PlayGameResponse>> PlayGame(Guid id,  PlayGameRequest playGameRequest)
         {
-            var result = new Result<PlayGameResponse>();
-            var randomValue = GameServiceHelper.GenerateRandomCard(1, 52);
+            var result = new Result<PlayGameResponse>();           
             
-            var game = await _repository.GetById(id);
-
+            Game game = await _repository.GetById(id);
                         
             if (game is null)
             {
@@ -53,26 +42,19 @@ namespace HigherOrLowerGame.Api.Core.services
                 return result;
             }
 
-            if (!GameServiceHelper.GameIsValidToPlay(game.CurrentPlayer, playGameRequest.CurrentPlayer, game.Finished))
+            if (!game.IsGameValid(playGameRequest.CurrentPlayer))
             {
                 result.WithError(game.Finished ? "This game is over." : "This is not your turn to play");
                 return result;
             }
+            var previousCard = game.CurrentCardValue;
 
-            var answerCorrect = GameServiceHelper.CorrectAnswer(playGameRequest.Guess, randomValue, game.CurrentCardValue);
+            game.ShuffleCard();
 
-            /*Refactor:  PROBABLY BREAKS THE OCP 
-             ---if we add another player we'll probably have to add new validation 
-             ---move to another method called SetGamePontuation, it takes the current game mounts the object to be returned
-            */
+            var answerCorrect = game.isAnswerCorrect(playGameRequest.Guess, previousCard);
 
-            game.CurrentCardValue = randomValue;
-            game.CurrentPlayer = playGameRequest.CurrentPlayer;
-            game.NumberOfCardOnDeck = game.NumberOfCardOnDeck - 1;
-            game.Finished = game.NumberOfCardOnDeck == 0 ? true : false;
-            game.FirstPlayerScore = answerCorrect && playGameRequest.CurrentPlayer == "player1" ? game.FirstPlayerScore+1 : game.FirstPlayerScore;
-            game.SecondPlayerScore = answerCorrect && playGameRequest.CurrentPlayer == "player2" ? game.SecondPlayerScore+1 : game.SecondPlayerScore;
-
+            game.setGameStatus(playGameRequest.CurrentPlayer, answerCorrect);            
+            
             if (!await _repository.UpdateAsync(game))
             {
                 result.WithException("Something bad happened.");
